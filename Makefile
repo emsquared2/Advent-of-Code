@@ -23,17 +23,18 @@ year ?=
 day  ?=
 part ?=
 
-ifeq ($(filter help,$(MAKECMDGOALS)),)
-	# Required argument checks
-	ifeq ($(year),)
-	$(error Missing argument: year=YYYY)
-	endif
-	ifeq ($(day),)
-	$(error Missing argument: day=XX)
-	endif
-	ifeq ($(part),)
-	$(error Missing argument: part=a|b)
-	endif
+# Skip argument checks when running help or clean
+ifeq ($(filter help clean,$(MAKECMDGOALS)),)
+  # Required argument checks
+  ifeq ($(year),)
+    $(error Missing argument: year=YYYY)
+  endif
+  ifeq ($(day),)
+    $(error Missing argument: day=XX)
+  endif
+  ifeq ($(part),)
+    $(error Missing argument: part=a|b)
+  endif
 endif
 
 # Construct paths based on inputs
